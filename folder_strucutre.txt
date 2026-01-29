@@ -1,0 +1,23 @@
+veranda-website/
+│
+├── index.html
+├── about.html
+├── weddings.html
+├── social-events.html
+├── corporate.html
+├── gallery.html
+├── floor-plans.html
+├── faq.html
+├── contact.html
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   └── script.js
+│
+└── images/
+    ├── ballroom-banquet.jpg
+    ├── hero-bg.jpg
+    ├── header-bg.jpg
+    └── (ar sob image ekhane add korbe)
