@@ -4,26 +4,29 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                echo '📥 Pulling latest code from GitHub...'
+                echo '📥 Pulling Veranda Project from GitHub...'
                 checkout scm
             }
         }
 
-        stage('Build & Deploy with Docker Compose') {
+        stage('Deploy with Docker Compose') {
             steps {
                 echo '🐳 Building Docker Image and Starting Container on Port 8082...'
                 sh '''
-                    # পুরোনো কন্টেইনার বন্ধ করে নতুন করে বিল্ড ও আপ করা
+                    # Old container stop and remove
                     docker compose down || true
+
+                    # Build new docker image and start container
                     docker compose up -d --build
                 '''
             }
         }
 
-        stage('Container Health Check') {
+        stage('Health Check') {
             steps {
-                echo '🔍 Checking running containers and app status...'
+                echo '🌐 Testing Container Health on Port 8082...'
                 sh '''
+                    sleep 3
                     docker ps | grep veranda-web-container
                     curl -sI http://localhost:8082 | head -n 1
                 '''
