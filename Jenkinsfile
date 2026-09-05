@@ -25,12 +25,12 @@ pipeline {
 
         stage('Deploy to Nginx') {
             steps {
-                echo '🚀 Deploying website files, CSS, JS & Images to Nginx...'
+                echo '🚀 Deploying website files to Nginx...'
                 sh '''
-                    # Old files delete kora
+                    # Clear old files
                     rm -rf /var/www/html/*
 
-                    # All files and folders (css, js, images, html) copy kora
+                    # Copy all website files
                     cp -r * /var/www/html/
 
                     echo "✅ Deploy Complete!"
@@ -40,15 +40,15 @@ pipeline {
 
         stage('Health Check') {
             steps {
-                echo '🌐 Testing website status...'
-                sh 'curl -sI http://localhost | head -n 1'
+                echo '🌐 Testing website status on port 8081...'
+                sh 'curl -sI http://localhost:8081 | head -n 1'
             }
         }
     }
 
     post {
         success {
-            echo '🎉 Veranda Website is successfully LIVE!'
+            echo '🎉 Veranda Website is successfully LIVE on Port 8081!'
         }
         failure {
             echo '❌ Deployment failed!'
